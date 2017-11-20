@@ -1,0 +1,82 @@
+﻿@model DisplaySinglePackageViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Provider") && User.Identity.Name == Model.CreatorUserName)
+{
+    <div id="navUser" class="navbar-inverse" style="margin:20px 0">
+        <div class="container">
+            <div class="navbar-header">
+                @if (Model.IsActive == true)
+                {
+                    <label class="label label-danger" style="font-size:150%; position:relative; top:10px;">Active</label>
+                }
+                else
+                {
+                    <label class="label label-default" style="font-size:150%; position:relative; top:10px;">Inactive</label>
+                }
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right" style="padding-right:30px">
+                    <li>
+                        <a asp-controller="Package" asp-action="Update" asp-route-id="@Model.PackId">
+                            <i class="glyphicon glyphicon-edit"></i> Edit This package
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9">
+        <h1>@Model.Name</h1>
+        <div class="row">
+            <img src="~/Uploads/@Model.ImgPath" alt="Package Photo" style="width:100%" />
+        </div>
+        <div class="row">
+            <h4>About:</h4>
+            <p class="details jumbotron">@Model.Description</p>
+        </div>
+        <div class="row">
+            <h4 id="feedback">Reviews <small>(@Model.TotalF)</small></h4>
+            @if (Model.TotalF != 0)
+            {
+                @Html.Partial("_FeedbackList", Model.Feedbacks)
+            }
+            else
+            {
+                <p>No Review</p>
+            }
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3" style="padding-right:10px">
+        <div class="well bookBox-container" data-spy="affix" data-offset-top="110" style="top:0;">
+            <div class="bookBox-content">
+                <h3>@Model.Name</h3>
+                <p>Location: @Model.Location</p>
+                <h1>$@Model.Price pp</h1>
+                @if (Model.IsActive == true)
+                {
+                    <a asp-controller="Order" asp-action="Create" asp-route-id="@Model.PackId" class="btn btn-success" style="font-size:150%;">
+                        Book Now
+                    </a>
+                }
+                else
+                {
+                    <p>This packag is not availale</p>
+                }
+                <div class="embed-responsive embed-responsive-4by3" style="margin-top:10px">
+                    <iframe class="embed-responsive-item" src="@Model.MapUrl" allowfullscreen></iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

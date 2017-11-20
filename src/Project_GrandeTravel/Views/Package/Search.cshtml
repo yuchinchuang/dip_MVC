@@ -1,0 +1,38 @@
+﻿@model SearchPackageViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="row">
+    <h1>Destination: @Model.SearchLocation</h1>
+
+    @using (Html.BeginForm("Search", "Package", FormMethod.Get))
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            @Html.Hidden("location", Model.SearchLocation)
+            <input asp-for="Keyword" class="form-control" placeholder="Keyword" />
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <input type="submit" class="btn btn-lg btn-warning" value="Filter" />
+            <a class="btn btn-lg btn-default" asp-controller="Package" asp-action="Search" asp-route-location="@Model.SearchLocation" asp-route-keyword="">Clear filter</a>
+        </div>
+    }
+</div>
+
+
+<div class="row">
+    <h2>Search Result <small>(@Model.Total)</small>
+        @Html.Partial("_Sorting", new ViewDataDictionary(this.ViewData) { { "Action", "Search" } })
+    </h2>
+
+    @Html.Partial("_packageList", Model.Packages)
+
+    @if (Model.Packages.Count() == 0)
+    {
+        <div class="col-xs-12">
+            <p>No matched result</p>
+        </div>
+    }
+</div>
+

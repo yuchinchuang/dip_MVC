@@ -1,0 +1,16 @@
+﻿<div class="pull-right" style="font-family:Arial">
+    <div class="dropdown text-left">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            Sort by
+            <i class="caret"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+                <a role="menuitem" asp-action="@ViewData["Action"]" asp-route-sortOrder="@ViewData["LocationSortParm"]">Location</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" asp-action="@ViewData["Action"]" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price</a>
+            </li>
+        </ul>
+    </div>
+</div>

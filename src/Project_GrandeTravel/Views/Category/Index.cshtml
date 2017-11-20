@@ -1,0 +1,61 @@
+﻿@model DisplayAllCategoriesViewModel
+
+@{ 
+    ViewData["Title"] = "Category";
+}
+<style>
+    .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    background-color: transparent;
+    padding:10px;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Provider")))
+{
+    <div class="navbar-inverse" style="margin:20px 0">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right" style="padding-right:30px">
+                <li>
+                    <a asp-area="" asp-controller="Category" asp-action="Create">
+                        <i class="glyphicon glyphicon-plus"></i> Add Category
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+
+<h1>Categories: </h1>
+
+@foreach (var item in Model.Categories)
+{
+    <hr />
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-7">
+            <a asp-controller="Category" asp-action="Display" asp-route-id="@item.CategoryId">
+                <div style="position:relative">
+                    <img src="~/Uploads/@item.ImgPath" alt="Category Photo" style="width:100%; position:relative" />
+                    <div class="overlay">
+                        <svg height="100%" width="100%">
+                            <circle cx="50%" cy="50%" r="20%" fill="black" />
+                            <text x="50%" y="50%" fill="white" font-size="140%" text-anchor="middle">@item.Name</text>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5">
+            <p>@item.Description</p>
+            <a asp-controller="Category" asp-action="Display" asp-route-id="@item.CategoryId" class="btn btn-warning pull-right">Packages in @item.Name</a>
+        </div>
+    </div>
+}
+
+
+

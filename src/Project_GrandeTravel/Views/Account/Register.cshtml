@@ -1,0 +1,55 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+    <div class="panel-primary col-xs-12 col-md-offset-3 col-md-6">
+        <div class="panel-heading text-center"><h3>Register</h3></div>
+        <div class="panel-body">
+
+            <form id="registerForm" asp-controller="Account" asp-action="Register" asp-antiforgery="true" method="post" role="form" style="padding:20px ">
+
+                <div asp-validation-summary="ModelOnly">
+
+                </div>
+
+                <div class="row form-group">
+                    <label>Are you a travel package provider?</label>
+                    <input asp-for="Role" type="radio" name="role" value="Customer" />No
+                    <input asp-for="Role" type="radio" name="role" value="Provider" />Yes
+                    <span class="col-xs-12" asp-validation-for="Role"></span>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-xs-12 col-sm-4 control-label" asp-for="Username"></label>
+                    <input class="col-xs-12 col-sm-8 form-control" asp-for="Username" autofocus/>
+                    <span class="col-xs-12" asp-validation-for="Username"></span>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-xs-12 col-sm-4 control-label" asp-for="Email"></label>
+                    <input class="col-xs-12 col-sm-8 form-control" asp-for="Email" />
+                    <span class="col-xs-12" asp-validation-for="Email"></span>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-xs-12 col-sm-4 control-label" asp-for="Password"></label>
+                    <input class="col-xs-12 col-sm-8 form-control" asp-for="Password" />
+                    <span class="col-xs-12" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-xs-12 col-sm-4 control-label" asp-for="ConfirmPassword"></label>
+                    <input class="col-xs-12 col-sm-8 form-control" asp-for="ConfirmPassword" />
+                    <span class="col-xs-12" asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div class="row form-group">
+                    <input id="btnRegister" type="submit" class="btn btn-lg col-xs-6 col-sm-4 btn-success pull-right" value="Register">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

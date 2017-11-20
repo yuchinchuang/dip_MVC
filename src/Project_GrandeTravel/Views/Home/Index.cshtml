@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@section Section{
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000" style="position:relative; top:-20px">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="~/images/Whitsunday-Islands-Queensland-Australia.gif" alt="Whitsunday Island" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Whitsunday Island, QLD
+                        <br />
+                        <a class="btn btn-default" asp-controller="Package" asp-action="Search" asp-route-location="Whitsunday Island">
+                            Find packages
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/harbourBrdge_1920.jpg" alt="Sydney harbour bridge" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Sydney, NSW
+                        <br />
+                        <a class="btn btn-default" asp-controller="Package" asp-action="Search" asp-route-location="Sydney">
+                            Find packages
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/rottestIsland-1931656_1920.jpg" alt="Rottnest Island" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Rottnest Island, Fremantle, WA
+                        <br />
+                        <a class="btn btn-default" asp-controller="Package" asp-action="Search" asp-route-location="Rottnest Island">
+                            Find packages
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/great ocean road 16_9.jpg" alt="Great Ocean Road" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Great Ocean Road, VIC
+                        <br />
+                        <a class="btn btn-default" asp-controller="Package" asp-action="Search" asp-route-location="Great Ocean Road">
+                            Find packages
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
+            <i class="sr-only">Previous</i>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
+            <i class="sr-only">Next</i>
+        </a>
+    </div>
+}
+
+<hr />
+<div class="row text-center">
+    <h2 style="font-family:Forte">Domestic Travel</h2>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <img src="~/images/australia-map_addACT.png" alt="Australia map"  usemap="#auMap" />
+        <map name="auMap">
+            <area alt="Western Australia" title="WA" href=@ViewData["WA"] shape="poly"
+                  coords="171,57,164,56,162,50,158,44,151,41,146,49,138,50,123,66,122,78,110,77,113,87,111,90,106,
+                  84,101,78,99,84,95,90,92,97,97,107,89,113,84,125,76,133,66,131,58,138,46,145,37,140,29,148,24,
+                  156,19,159,13,160,8,171,3,167,0,173,2,179,1,199,6,210,13,217,10,223,3,223,1,229,13,239,15,245,
+                  18,255,25,264,31,280,38,293,44,306,45,317,38,325,40,333,49,334,58,337,74,334,81,328,90,319,103,
+                  315,133,314,137,306,144,297,151,287,172,285" />
+            <area alt="Northern Territory" title="NT" href=@ViewData["NT"] shape="poly"
+                  coords="291,197,291,76,286,70,277,66,270,63,263,60,256,56,257,48,263,46,267,39,266,31,273,30,
+                  279,26,277,17,269,10,262,12,258,18,250,15,246,11,238,9,229,11,225,4,221,6,228,16,217,17,210,15,
+                  201,15,195,20,192,25,191,32,187,38,185,44,188,51,187,56,178,60,180,197" />
+            <area alt="South Australia" title="SA" href=@ViewData["SA"] shape="poly"
+                  coords="180,285,180,206,316,206,317,367,310,363,306,355,306,347,306,337,301,331,292,331,281,338,
+                  275,337,275,328,280,318,285,310,289,301,288,295,282,295,281,301,275,305,269,320,264,322,260,313,
+                  257,306,250,299,249,291,243,286,233,283,225,281,216,277,198,276,186,280">
+            <area alt="Queensland" title="QLD" href=@ViewData["QLD"] shape="poly"
+                  coords="299,197,300,76,310,91,320,97,334,82,339,57,337,39,344,30,344,21,351,2,358,1,361,17,366,
+                  29,366,49,384,55,388,66,384,75,399,93,396,101,395,116,408,122,426,134,426,143,432,154,432,168,
+                  438,169,441,162,447,169,445,177,456,188,466,201,472,225,459,227,448,234,436,225,429,227,417,233,
+                  324,231,323,198">
+            <area alt="New South Wales" title="NSW" href=@ViewData["NSW"] shape="poly"
+                  coords="403,318,411,317,416,321,416,329,411,343,411,360,443,308,454,297,465,265,
+                  473,251,473,232,447,242,436,235,426,235,419,238,324,238,324,313,334,314,339,319,346,
+                  320,353,324,369,338,377,338,385,340,390,346,403,355,411,360,411,343,400,342,396,330">
+            <area alt="Victoria" title="VIC" href=@ViewData["VIC"] shape="poly"
+                  coords="325,322,334,325,350,332,362,345,377,345,388,355,409,368,386,371,370,385,359,375,350,377,325,371" />
+            <area alt="Tasmania" title="TAS" href=@ViewData["TAS"] shape="poly"
+                  coords="353,400,371,411,388,405,390,417,389,427,367,441,360,437" />
+            <area alt="Australian Capital Territory" title="ACT" href=@ViewData["ACT"] shape="poly"
+                  coords="404,323,411,324,410,331,406,339,401,334" />
+            <area alt="Australian Capital Territory" title="ACT" href=@ViewData["ACT"] shape="rect" coords="418,368,472,396">
+            </map>
+    </div>
+</div>
+
+

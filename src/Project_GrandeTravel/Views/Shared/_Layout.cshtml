@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Grande Travel</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+    
+</head>
+<body>
+    <div id="navBG">
+
+    </div>
+    <div id ="siteNav" class="navbar" style="position:absolute; z-index:5; width:100%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <img id="logo" src="~/images/GrandeTravelLogo.png" />
+                    </a>
+                    <div id="searchL" class="col-xs-4 col-sm-4 navbar-form navbar-brand has-feedback " role="search">
+                        @using (Html.BeginForm("Search", "Package", FormMethod.Get))
+                        {
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                            <input name="location" placeholder="Enter Destination" class="form-control">
+                        }
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav text-center">
+                        <li><a id="navCat" asp-area="" asp-controller="Category" asp-action="Index">Categories</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right text-center">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                @if (User.IsInRole("Customer"))
+                                {
+                                    <a asp-area="" asp-controller="Customer" asp-action="Index">
+                                        <i class="glyphicon glyphicon-user"></i> @User.Identity.Name
+                                    </a>
+                                }
+                                else if (User.IsInRole("Provider"))
+                                {
+                                    <a asp-area="" asp-controller="Provider" asp-action="Index">
+                                        <i class="glyphicon glyphicon-user"></i> @User.Identity.Name
+                                    </a>
+                                }
+                            </li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderSection("Section",false)
+    </div>
+    <div class="container body-content" style="margin-top:80px">
+        @RenderBody()
+    </div>
+
+    <div style="background-image:url(../../images/White-Abstract-Wallpapers.jpg)"> 
+        <hr />          
+        <footer>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <i class="glyphicon glyphicon-flag"></i>
+                    <h4><a asp-area="" asp-controller="Home" asp-action="About">About GrandeTravel</a></h4>
+                </div>
+                <div id="followUs" class="col-md-4">
+                    <i class="glyphicon glyphicon-hand-down"></i>
+                    <h4>Follow Us</h4>
+                    <a href="#">
+                        <img src="~/images/facebook-logo-png-transparent-background-1200x1200.png"/>
+                    </a>
+                    <a href="#">
+                        <img src="~/images/twitter icon.png"/>
+                    </a>
+                    <a href="#">
+                        <img src="~/images/ig icon.png"/>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                    <h4>Contact Us</h4>
+                    <address>
+                        23 George St<br />
+                        Sydney, NSW<br />
+                        Australia 2000
+                    </address>
+                    <label>Email: info@grandetravel.com</label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-center">&copy; 2017 - GrandeTravel &nbsp;&nbsp;<a>Terms and Conditions</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="~/js/jquery.rwdImageMaps.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model DisplayProviderProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+@Html.Partial("_profNav")
+
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <img alt="photo" src="~/Uploads/@Model.ImgPath" />
+    </div>
+    <div class="col-xs-6 col-md-8">
+        <h2>Active Packages</h2>
+        @Html.Partial("_PackagesTable", Model.activePackages)
+
+        <h2>Inactive Package</h2>
+        @Html.Partial("_PackagesTable", Model.inactivePackages)
+
+    </div>
+</div>

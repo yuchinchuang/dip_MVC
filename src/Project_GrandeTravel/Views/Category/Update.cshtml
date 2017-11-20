@@ -1,0 +1,48 @@
+﻿@model UpdateCategoryViewModel
+
+@{
+    ViewData["Title"] = "Update Category";
+}
+
+
+<div class="row">
+    <div class="row text-center">
+        <h1>Update - @Model.Name</h1>
+    </div>
+
+    <div class="col-xs-6 col-md-4">
+        <img src="~/Uploads/@Model.ImgPath" alt="Category Photo" style="width:100%" />
+    </div>
+    <div class="col-xs-6 col-md-8">
+        <form asp-controller="Category" asp-action="Update" asp-antiforgery="true" method="post" role="form" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly">
+
+            </div>
+
+            <div class="=row form-group clearfix"  style="margin-left:-15px">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="ImgPath"></label>
+                <input class="col-xs-12 col-md-8" type="file" name="ImgPath" />
+                <span class="col-xs-12" asp-validation-for="ImgPath"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Name"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Name" />
+                <span class="col-xs-12" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Description"></label>
+                <textarea class="col-xs-12 col-md-8 form-control" asp-for="Description" rows="5"></textarea>
+                <span class="col-xs-12" asp-validation-for="Description"></span>
+            </div>
+
+            <div class="row form-group">
+                <a asp-controller="Category" asp-action="Display" asp-route-id="@Model.CatId"><input type="button" class="btn btn-lg" value="Back" /></a>
+                <input type="submit" class="btn btn-lg btn-success pull-right" value="Save Changes">
+            </div>
+        </form>
+    </div>
+</div>
+

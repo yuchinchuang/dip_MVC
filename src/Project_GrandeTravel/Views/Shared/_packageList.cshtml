@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Package>
+
+@foreach (var p in Model)
+{
+    @Html.Partial("_packageInfo", p);
+}

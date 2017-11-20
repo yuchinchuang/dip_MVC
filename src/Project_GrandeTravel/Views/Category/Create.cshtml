@@ -1,0 +1,43 @@
+﻿@model CreateCategoryViewModel
+
+@{ 
+    ViewData["Title"] = "Create New Category";
+}
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
+        <div class="row text-center">
+            <h1>Add New Category</h1>
+        </div>
+
+        <form asp-controller="Category" asp-action="Create" asp-antiforgery="true" method="post" role="form" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly">
+
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Name"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Name" autofocus/>
+                <span class="col-xs-12" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Description"></label>
+                <textarea class="col-xs-12 col-md-8 form-control" asp-for="Description" rows="5"></textarea>
+                <span class="col-xs-12" asp-validation-for="Description"></span>
+            </div>
+
+            <div class="row form-group clearfix">
+                <label asp-for="ImgPath" class="col-xs-12 col-md-4 control-label"></label>
+                <input type="file" name="ImgPath" class="col-xs-12 col-md-8" />
+            </div>
+
+            <div class="row form-group ">
+                <a asp-controller="Category" asp-action="Index"><input type="button" class="btn btn-lg" value="Back" /></a>
+                <input type="submit" class="btn btn-lg btn-success pull-right" value="Add">
+            </div>
+        </form>
+    </div>
+</div>

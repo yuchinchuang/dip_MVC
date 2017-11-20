@@ -1,0 +1,56 @@
+﻿@model UpdateProviderProfileViewModel
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+@Html.Partial("_profNav")
+
+<h1 class="row text-center">Update Profile</h1>
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <img alt="photo" src="~/Uploads/@Model.ImgPath" />
+    </div>
+    <div class="col-xs-6 col-md-8">
+        <form asp-controller="Provider" asp-action="UpdateProfile" method="post" role="form" asp-antiforgery="true"  enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly">
+
+            </div>
+
+            <div class="=row form-group clearfix" style="margin-left:-15px">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="ImgPath"></label>
+                <input class="col-xs-12 col-md-8" type="file" name="ImgPath" />
+                <span class="col-xs-12" asp-validation-for="ImgPath"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="CompanyName"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="CompanyName" />
+                <span class="col-xs-12" asp-validation-for="CompanyName"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Email"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Email" />
+                <span class="col-xs-12" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Phone"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Phone" />
+                <span class="col-xs-12" asp-validation-for="Phone"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Address"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Address" />
+                <span class="col-xs-12" asp-validation-for="Address"></span>
+            </div>
+
+            <div class="row form-group">
+                <a asp-controller="Provider" asp-action="Index"><input type="button" class="btn btn-lg col-lg-offset-1 col-lg-4" value="Back" /></a>
+                <input type="submit" class="btn btn-lg col-lg-offset-1 col-lg-4 btn-success" value="Save Changes" />
+            </div>
+        </form>
+    </div>
+</div>

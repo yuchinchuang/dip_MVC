@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Feedback>
+
+@foreach (var f in Model)
+{
+    @Html.Partial("_feedback", f)
+}

@@ -1,0 +1,14 @@
+﻿@model CreateFeedbackViewModel
+
+<form asp-controller="Order" asp-action="CreateFeedback" method="post" role="form" asp-antiforgery="true" asp-route-id="@Model.OrderId">
+    <input type="hidden" asp-for="OrderId" value="@Model.OrderId" />
+    <div class="row">
+        <input type="hidden" asp-for="PackageId" />
+        <textarea asp-for="@Model.FeedbackContent" autofocus rows="10" placeholder="Leave your feedback here..."></textarea>
+        <span asp-validation-for="@Model.FeedbackContent"></span>
+    </div>
+    <div class="pull-right">
+        <input id="btnSubmit" class="btn btn-success" type="submit" value="Send" />
+    </div>
+</form>
+

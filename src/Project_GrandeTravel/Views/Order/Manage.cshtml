@@ -1,0 +1,61 @@
+﻿@model ManageOrderViewModel
+
+@{
+    ViewData["Title"] = "Manage Booking";
+}
+
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <h3>@Model.Package.Name</h3>
+        <img alt="package photo" src="~/Uploads/@Model.Package.ImgPath" /> 
+        <ul class="list-group list-unstyled">
+            <li>@Model.Package.Location</li>
+            <li>$@Model.Package.Price per person</li>
+        </ul>
+    </div>
+    <div class="col-xs-6 col-md-8">
+        <h3>Booking Date: @string.Format("{0:dd/MM/yyyy}", Model.OrderDate)</h3>
+        <form asp-controller="Order" asp-action="Manage" asp-antiforgery="true" method="post" role="form" asp-route-id="@Model.OrderId">
+            <input asp-for="PackageId" value="@Model.PackageId" style="display:none" />
+            <div asp-validation-summary="ModelOnly">
+
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Email"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Email" />
+                <span class="col-xs-12" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Mobile"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Mobile" />
+                <span class="col-xs-12" asp-validation-for="Mobile"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="DepartingDate"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="DepartingDate" type="text" placeholder="DD/MM/YYYY" />
+                <span class="col-xs-12" asp-validation-for="DepartingDate"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label">Adult</label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="NumberOfAdult" />
+                <span class="col-xs-12" asp-validation-for="NumberOfAdult"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Comment"></label>
+                <textarea class="col-xs-12 col-md-8 form-control" asp-for="Comment" rows="5"></textarea>
+                <span class="col-xs-12" asp-validation-for="Comment"></span>
+            </div>
+
+            <input type="hidden" asp-for="PackageId" value="@Model.PackageId" />
+
+            <div class="row form-group">
+                <input type="submit" class="btn btn-lg col-lg-offset-2 col-lg-4 btn-success" value="Save Changes">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model DisplaySingleCategoryViewModel
+@{
+    ViewData["Title"] = Model.CatName;
+}
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Provider")))
+{
+    <div class="navbar-inverse" style="margin:20px 0">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right" style="padding-right:30px">
+                <li>
+                    <a asp-controller="Category" asp-action="Update" asp-route-id="@Model.CatId">Update This Category</a>
+                </li>
+                <li>
+                    <a asp-controller="Package" asp-action="Create" asp-route-id="@Model.CatId">
+                        <i class="glyphicon glyphicon-plus"></i> Add Package
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+
+<div class="row text-center">
+    <h1>@Model.CatName</h1>
+    <div class="col-sm-offset-1 col-sm-10">
+        <img src="~/Uploads/@Model.ImgPath" alt="Category Photo" />
+    </div>
+</div>
+<div class="row text-center">
+    <p class="jumbotron">@Model.CatDescription</p>
+</div>
+
+<div class="row">
+    <h2 >Packages <small>(@Model.TotalPackage)</small>
+        @Html.Partial("_Sorting", new ViewDataDictionary(this.ViewData) { { "Action", "Index" } })
+    </h2>
+
+    @Html.Partial("_packageList", Model.CatPackages)
+
+    @if(Model.TotalPackage == 0)
+    {
+        <div class="col-xs-12">
+            <p>No package in @Model.CatName at this moment.</p>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,66 @@
+﻿@model DisplaySingleOrderViewModel
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+@if (Model.DepartingDate > DateTime.Today)
+{
+    <div class="navbar-inverse" style="margin:20px 0">
+        <div class="container">
+            <div>
+                <ul class="nav navbar-nav navbar-right" style="padding-right:30px">
+                    <li><a asp-area="" asp-controller="Order" asp-action="Manage" asp-route-id="@Model.OrderId">Manage Booking</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-offset-2 col-md-5">
+        <h1>@Model.Package.Name</h1>
+        <img src="~/Uploads/@Model.Package.ImgPath" alt="Package Photo" />
+        <ul class="list-unstyled">
+            <li>Location: @Model.Package.Location</li>
+            <li>Price: $@Model.Package.Price pp</li>
+            <li class="details">
+                About:
+                @Model.Package.Description
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col col-md-3">
+        <div class="row">
+            <ul class="list-unstyled">
+                <li><h3>Departing Date: @string.Format("{0:dd/MM/yyyy}", Model.DepartingDate)</h3></li>
+                <li>@Model.NumberOfAdult Adult</li>
+                <li>Booking Date: @Model.OrderDate</li>
+                <li>Email: @Model.Email</li>
+                <li>Mobil: @Model.Mobile</li>
+                <li>Comment: @Model.Comment</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            @if (Model.Provider != null)
+            {
+                <ul class="list-unstyled">
+                    <li><h3>Package provider: @Model.Provider.CompanyName</h3></li>
+                    <li>Email: @Model.Provider.Email</li>
+                    <li>Phone: @Model.Provider.Phone</li>
+                    <li>Address: @Model.Provider.Address</li>
+                </ul>
+            }
+            else
+            {
+                <div class="jumbotron">
+                    <h2>Please contact Grande Travel</h2>
+                    <label>Email: info@grandetravel.com</label>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

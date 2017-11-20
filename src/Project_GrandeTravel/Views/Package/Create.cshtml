@@ -1,0 +1,72 @@
+﻿@model CreatePackageViewModel
+
+@{
+    ViewData["Title"] = "Add New Package";
+}
+
+<h1 class="row text-center">Add New Package</h1>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+        <form asp-controller="Package" asp-action="Create" asp-antiforgery="true" method="post" role="form" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly">
+
+            </div>
+            <input type="hidden" asp-for="CatList" />
+
+            <div class="row form-group">
+                <label asp-for="CategoryId" class="col-xs-12 col-md-4 control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.CatList,"CategoryId","Name"))">
+                    @if (Model.CategoryId != 0)
+                    {
+                        <option value="@Model.CategoryId">Select a category</option>
+                    }
+                    else
+                    {
+                        <option>Select a category</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Name"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Name" />
+                <span class="col-xs-12" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Location"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Location" />
+                <span class="col-xs-12" asp-validation-for="Location"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Description"></label>
+                <textarea class="col-xs-12 col-md-8 form-control" rows="5" asp-for="Description"></textarea>
+                <span class="col-xs-12" asp-validation-for="Description"></span>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-xs-12 col-md-4 control-label" asp-for="Price"></label>
+                <input class="col-xs-12 col-md-8 form-control" asp-for="Price" />
+                <span class="col-xs-12" asp-validation-for="Price"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="ImgPath" class="col-xs-12 col-md-4 control-label"></label>
+                <input type="file" name="ImgPath" class="col-xs-12 col-md-8" />
+            </div>
+
+            <div class="row form-group">
+                <label class="lblIsActive col-xs-12 col-md-4 control-label">Activate this package?</label>
+                <input type="checkbox" asp-for="IsActive" />
+            </div>
+
+            <div class="row form-group ">
+                <a asp-controller="Provider" asp-action="Index" asp-route-id="@Model.UserId"><input type="button" class="btn btn-lg" value="Back" /></a>
+                <input type="submit" class="btn btn-lg btn-success pull-right" value="Add">
+            </div>
+        </form>
+    </div>
+</div>

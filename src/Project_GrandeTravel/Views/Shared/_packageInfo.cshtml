@@ -1,0 +1,38 @@
+﻿@model Package
+
+<style>
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .panel:hover .overlay {
+        opacity: 0.9;
+    }
+</style>
+
+<a asp-controller="Package" asp-action="Display" asp-route-id="@Model.PackageId">
+    <div class="packPanel panel panel-info col-xs-12 col-sm-4 col-md-3">
+        <div class="panel-heading" style="">
+            <h4>@Model.Name</h4>
+        </div>
+        <div class="panel-body" style="position:relative;">
+            <img src="~/Uploads/@Model.ImgPath" alt="Package Photo" />
+            <h4>@Model.Location</h4>
+            <label class="lblPrice label label-danger pull-right" style="font-size:2em;">$@Model.Price</label>
+            <div class="overlay">
+                <div class="details" style="padding:20px; overflow:hidden; height:70%">@Model.Description</div>
+                <p class="label label-warning" style="font-size:150%; display:block;">Find Out More</p>
+            </div>
+        </div>
+    </div>
+</a>

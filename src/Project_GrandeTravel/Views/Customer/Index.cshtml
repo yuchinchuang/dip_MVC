@@ -1,0 +1,94 @@
+﻿@model DisplayCustomerProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+<style>
+    .slideContent{
+        display:none;
+    }
+</style>
+
+@Html.Partial("_cusNav")
+
+<div class="row">
+    <div class="col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-3">
+        <img alt="photo" src="~/Uploads/@Model.ImgPath"/>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <h2>Upcoming bookings</h2>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Departing Date</th>
+                <th>Name</th>
+                <th colspan="2">Location</th>
+            </tr>
+            @if (Model.ActiveOrders.Count() != 0)
+            {
+                foreach (var order in Model.ActiveOrders)
+                {
+                    foreach (var pack in Model.Packages)
+                    {
+                        if (pack.PackageId == order.PackageId)
+                        {
+                            <tr>
+                                <td>@string.Format("{0:dd/MM/yyyy}", order.DepartingDate)</td>
+                                <td>@pack.Name</td>
+                                <td>@pack.Location</td>
+                                <td class="pull-right">
+                                    <a class="btn btn-info" asp-controller="Order" asp-action="Display" asp-route-id="@order.OrderId">Booking details</a>
+                                </td>
+                            </tr>                            
+                        }
+                    }
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">You do not have any upcomming booking</td>
+                </tr>
+            }
+
+        </table>
+        <h2>Booking history</h2>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Departing Date</th>
+                <th>Name</th>
+                <th colspan="2">Location</th>
+            </tr>
+            @if (Model.InactiveOrders.Count() != 0)
+            {
+                foreach (var order in Model.InactiveOrders)
+                {
+                    foreach (var pack in Model.Packages)
+                    {
+                        if (pack.PackageId == order.PackageId)
+                        {
+                            <tr>
+                                <td>@string.Format("{0:dd/MM/yyyy}", order.DepartingDate)</td>
+                                <td>@pack.Name</td>
+                                <td>@pack.Location</td>
+                                <td class="pull-right">
+                                    <a class="btn btn-info" asp-controller="Order" asp-action="Display" asp-route-id="@order.OrderId">Booking details</a>
+                                    <p></p>
+                                    <a class="slideToggle btn btn-primary">Leave feedback</a>
+                                    <div class="slideContent">
+                                        @Html.Partial("../Order/CreateFeedback.cshtml", new CreateFeedbackViewModel() { OrderId = order.OrderId, PackageId = pack.PackageId })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">You have not booked any travel package</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@model Feedback
+
+<div class="row">
+    <blockquote>
+        <p>@Model.Content</p>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Provider"))
+        {
+            <footer class="pull-right">Order Id: @Model.OrderId</footer>
+        }
+    </blockquote>
+</div>
